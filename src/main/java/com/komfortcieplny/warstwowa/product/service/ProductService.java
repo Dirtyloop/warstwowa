@@ -2,23 +2,23 @@ package com.komfortcieplny.warstwowa.product.service;
 
 import com.komfortcieplny.warstwowa.product.dao.ProductDao;
 import com.komfortcieplny.warstwowa.product.model.Product;
+import com.komfortcieplny.warstwowa.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private ProductDao productDao;
+    private ProductRepository productRepository;
 
-    public ProductService(ProductDao productDao) {
-        this.productDao = productDao;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     public Product getProduct(Long id) {
-        Product product = productDao.getProduct(id);
-        if(product != null) {
-            return product;
-        } else {
+        return productRepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("Brak produktu o id " + id);
-        }
+        });
     }
 }

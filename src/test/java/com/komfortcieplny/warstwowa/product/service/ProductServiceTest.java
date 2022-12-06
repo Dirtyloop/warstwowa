@@ -1,12 +1,14 @@
 package com.komfortcieplny.warstwowa.product.service;
 
-import com.komfortcieplny.warstwowa.product.dao.ProductDao;
 import com.komfortcieplny.warstwowa.product.model.Product;
+import com.komfortcieplny.warstwowa.product.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -16,7 +18,7 @@ import static org.mockito.Mockito.when;
 class ProductServiceTest {
 
     @Mock
-    private ProductDao productDao;
+    private ProductRepository productRepository;
     @InjectMocks
     private ProductService productService;
 
@@ -24,7 +26,7 @@ class ProductServiceTest {
     void shoulReturnExistingProductId() {
         Product product = new Product();
         product.setId(1L);
-        when(productDao.getProduct(anyLong())).thenReturn(product);
+        when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
 
         Product resultProduct = productService.getProduct(1L);
         assertEquals(1L, resultProduct.getId());
