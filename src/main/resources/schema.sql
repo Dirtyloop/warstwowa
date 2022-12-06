@@ -1,6 +1,6 @@
 create table product (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id integer AUTO_INCREMENT PRIMARY KEY,
     name varchar(120) NOT NULL,
     description varchar(255) NOT NULL,
-    price decimal (10,2)
+    price decimal(10,2)
 );
