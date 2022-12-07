@@ -5,6 +5,8 @@ import com.komfortcieplny.warstwowa.product.model.Product;
 import com.komfortcieplny.warstwowa.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -20,5 +22,9 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> {
             throw new IllegalArgumentException("Brak produktu o id " + id);
         });
+    }
+
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
 }
